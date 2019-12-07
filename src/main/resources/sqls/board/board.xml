@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boardMapper">	
+
+	
+	<resultMap id="ArticleResultMap" type="Article">
+		<result property="id" column="id"/>
+		<result property="writer" column="writer"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="regDate" column="reg_date" />
+	</resultMap>
+
+	<select id = "totalCount" parameterType="map" resultType="int">
+		SELECT count(id)
+		FROM test_board
+	</select>
+	
+	<select id="list" parameterType="map" resultMap="ArticleResultMap">
+	<![CDATA[
+		SELECT 
+			b.rnum,
+			b.id,
+			b.writer,
+			b.title,
+			b.content,
+			b.reg_date
+		FROM 
+			(SELECT 
+				rownum AS rnum, 
+				a.id, 
+				a.writer, 
+				a.title, 
+				a.content, 
+				a.reg_date
+			FROM(
+				SELECT 
+					id,
+					writer,
+					title,
+					content,
+					reg_date 
+				FROM 
+					test_board
+				ORDER BY id DESC)a
+			WHERE
+				rownum <= #{endCount})b
+		WHERE b.rnum >= #{startCount}	
+	]]>
+	</select>
+</mapper>
