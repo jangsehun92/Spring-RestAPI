@@ -48,4 +48,16 @@
 		WHERE b.rnum >= #{startCount}	
 	]]>
 	</select>
+	
+	<select id="detail" parameterType="int" resultMap="ArticleResultMap">
+	
+	</select>
+	
+	<update id="update" parameterType="map">
+		
+	</update>
+	
+	<delete id="delete" parameterType="int">
+	
+	</delete>
 </mapper>

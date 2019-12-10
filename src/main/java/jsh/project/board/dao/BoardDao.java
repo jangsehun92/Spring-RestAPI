@@ -1,6 +1,11 @@
 package jsh.project.board.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+
+import jsh.project.board.dto.Article;
 
 @Repository
 public class BoardDao {
@@ -10,5 +15,25 @@ public class BoardDao {
 	public BoardDao(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-
+	
+	public int totalCount() {
+		return sqlSession.selectOne("boardMapper.totalCount");
+	}
+	
+	public List<Article> list() {
+		return sqlSession.selectList("boardMapper.list");
+	}
+	
+	public Article detail(int id) {
+		return sqlSession.selectOne("boardMapper.detail",id);
+	}
+	
+	public int update(int id) {
+		return sqlSession.update("boardMapper.update",id);
+	}
+	
+	public int delete(int id) {
+		return sqlSession.delete("boardMapper.delete",id);
+	}
+	
 }
