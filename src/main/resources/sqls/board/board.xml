@@ -50,7 +50,16 @@
 	</select>
 	
 	<select id="detail" parameterType="int" resultMap="ArticleResultMap">
-	
+		SELECT
+			id,
+			writer,
+			title,
+			content,
+			reg_date
+		FROM
+			test_board
+		WHERE
+			id = #{id}
 	</select>
 	
 	<update id="update" parameterType="map">

@@ -1,6 +1,7 @@
 package jsh.project.board.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -20,8 +21,8 @@ public class BoardDao {
 		return sqlSession.selectOne("boardMapper.totalCount");
 	}
 	
-	public List<Article> list() {
-		return sqlSession.selectList("boardMapper.list");
+	public List<Article> list(Map<String, Integer> paramMap) {
+		return sqlSession.selectList("boardMapper.list", paramMap);
 	}
 	
 	public Article detail(int id) {
