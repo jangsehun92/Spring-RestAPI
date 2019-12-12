@@ -1,5 +1,6 @@
 # Spring_RestApi_BoardProject
-- ajax & REST API 게시판
+- ajax를 이용하여 RestAPI 호출
+- js & jqery 를 이용하여 RestApi에서 받아온 값을 처리
 
 ## DB dependency 
 * OracleDB : https://github.com/jangsehun92/SpringOracleDB
