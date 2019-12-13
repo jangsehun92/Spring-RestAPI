@@ -3,10 +3,11 @@
 - js & jqery 를 이용하여 RestApi에서 받아온 값을 처리
 
 ## 기능 목록 
-* 전체 게시글 페이징
+* 전체 게시글 보기
+* 페이징 처리
 * 단일 게시글 요청시 게시글 정보 표시
 * 게시글 입력
-* 해당 글의 비밀번호가 같아야 수정/삭제 가능
+* 해당 글의 비밀번호 입력 후 수정/삭제
 
 ## 관련 dependency 
 * OracleDB : https://github.com/jangsehun92/SpringOracleDB
