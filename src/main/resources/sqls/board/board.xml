@@ -11,7 +11,7 @@
 		<result property="regDate" column="reg_date" />
 	</resultMap>
 
-	<select id = "totalCount" parameterType="map" resultType="int">
+	<select id = "totalCount" resultType="int">
 		SELECT count(id)
 		FROM test_board
 	</select>
@@ -62,11 +62,33 @@
 			id = #{id}
 	</select>
 	
-	<update id="update" parameterType="map">
-		
+	<insert id="insert" parameterType="ArticleCreateRequest">
+		INSERT INTO 
+			test_board
+		VALUES(
+			test_board_seq.nextval,
+			#{writer},
+			#{title},
+			#{content},
+			SYSDATE
+		)
+	</insert>
+	
+	<update id="update" parameterType="ArticleUpdateRequest">
+		UPDATE 
+			test_board
+		SET
+			TITLE = #{title},
+			CONTENT = #{content}
+		WHERE
+			ID = #{id}
 	</update>
 	
 	<delete id="delete" parameterType="int">
-	
+		DELETE
+		FROM
+			test_board
+		WHERE
+			id = #{id}
 	</delete>
 </mapper>

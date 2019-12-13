@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import jsh.project.board.dao.BoardDao;
 import jsh.project.board.dto.Article;
+import jsh.project.board.dto.ArticleCreateRequest;
+import jsh.project.board.dto.ArticleUpdateRequest;
 import util.Pagination;
 
 @Service
@@ -34,8 +36,13 @@ public class BoardService {
 		return boardDao.detail(id);
 	}
 	
-	public int articleUpdate(int id) {
-		return boardDao.update(id);
+	public void articleCreate(ArticleCreateRequest dto) {
+		boardDao.create(dto);
+	}
+	
+	public void articleUpdate(int id, ArticleUpdateRequest dto) {
+		dto.setId(id);
+		boardDao.update(dto);
 	}
 	
 	public void articleDelete(int id) {

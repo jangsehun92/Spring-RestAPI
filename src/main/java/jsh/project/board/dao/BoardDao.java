@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import jsh.project.board.dto.Article;
+import jsh.project.board.dto.ArticleCreateRequest;
+import jsh.project.board.dto.ArticleUpdateRequest;
 
 @Repository
 public class BoardDao {
@@ -29,8 +31,12 @@ public class BoardDao {
 		return sqlSession.selectOne("boardMapper.detail",id);
 	}
 	
-	public int update(int id) {
-		return sqlSession.update("boardMapper.update",id);
+	public int create(ArticleCreateRequest dto) {
+		return sqlSession.insert("boardMapper.insert",dto);
+	}
+	
+	public int update(ArticleUpdateRequest dto) {
+		return sqlSession.update("boardMapper.update",dto);
 	}
 	
 	public int delete(int id) {

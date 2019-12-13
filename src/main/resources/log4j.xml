@@ -15,6 +15,15 @@
 		<level value="info" />
 	</logger>
 	
+	<!-- 추가 -->
+	<logger name="org.ibatis">
+		<level value="info"/>
+	</logger>
+	
+	<logger name="java.sql">
+		<level value="info"/>
+	</logger>
+	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />

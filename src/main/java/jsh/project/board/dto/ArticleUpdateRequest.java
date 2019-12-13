@@ -1,22 +1,21 @@
 package jsh.project.board.dto;
 
 public class ArticleUpdateRequest {
-	private String writer;
+	private int id;
 	private String title;
 	private String content;
 
-	public ArticleUpdateRequest(String writer, String title, String content) {
-		this.writer = writer;
+	public ArticleUpdateRequest(String title, String content) {
 		this.title = title;
 		this.content = content;
 	}
-
-	public String getWriter() {
-		return writer;
+	
+	public int getId() {
+		return id;
 	}
-
-	public void setWriter(String writer) {
-		this.writer = writer;
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTitle() {

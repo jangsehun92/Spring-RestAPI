@@ -1,24 +1,16 @@
 package jsh.project.board.dto;
 
-import java.sql.Date;
-
-public class Article {
-	private int id;
+public class ArticleCreateRequest {
 	private String writer;
+	private String password;
 	private String title;
 	private String content;
-	private Date regDate;
 	
-	public Article() {
-		
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+	public ArticleCreateRequest(String writer, String password, String title, String content) {
+		this.writer = writer;
+		this.password = password;
+		this.title = title;
+		this.content = content;
 	}
 
 	public String getWriter() {
@@ -28,7 +20,15 @@ public class Article {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -44,13 +44,6 @@ public class Article {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-	public Date getRegDate() {
-		return regDate;
-	}
-
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
-	}
 	
+
 }
