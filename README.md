@@ -5,10 +5,8 @@
 ## 기능 목록 
 * 전체 게시글 페이징
 * 단일 게시글 요청시 게시글 정보 표시
-  * [예외] 해당 게시글이 없는 경우
 * 게시글 입력
 * 해당 글의 비밀번호가 같아야 수정/삭제 가능
-  * [예외] 비밀번호가 다른 경우
 
 ## 관련 dependency 
 * OracleDB : https://github.com/jangsehun92/SpringOracleDB
