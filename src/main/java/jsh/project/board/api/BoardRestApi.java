@@ -52,7 +52,6 @@ public class BoardRestApi {
 	//Article UPDATE
 	@PutMapping("/article/{id}")
 	public ResponseEntity<String> create(ArticleUpdateRequest dto, @PathVariable("id")int id){
-		boardService.articleUpdate(id,dto);
 		return new ResponseEntity<String>("UPDATE OK",HttpStatus.OK);
 	}
 	
