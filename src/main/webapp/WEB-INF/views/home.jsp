@@ -19,22 +19,31 @@ window.onload = function() {
 		dataType : "json", 
 		
 		success:function(data){
-			alert(data.articleList!=null);
+			alert(data.articleList[0]);
 			
 			if(data.articleList != null){
 				for(var ele in data.articleList){
-					for(var ele2 in data.articleList[ele]){
-						console.log(ele2);
-					}
+					$("#boardTable").append(
+						"<tr>"+
+							"<td>"+data.articleList[ele].id+"</td>"+
+							"<td>"+data.articleList[ele].title+"</td>"+
+							"<td align='right'>"+data.articleList[ele].writer+"</td>"+
+							"<td align='right'>"+uxin_timestamp(data.articleList[ele].regDate)+"</td>"+
+						"</tr>"
+					);
 				}
 
-				alert(data.articleList[0].id);
-				$("#articleList").append(
+				//alert(data.articleList[0].id);
+				/*
+				$("#boardTable").append(
+					"<tr>"+
 						"<td>"+data.articleList[0].id+"</td>"+
 						"<td>"+data.articleList[0].title+"</td>"+
 						"<td align='right'>"+data.articleList[0].writer+"</td>"+
-						"<td align='right'>"+uxin_timestamp(data.articleList[0].regDate)+"</td>"
+						"<td align='right'>"+uxin_timestamp(data.articleList[0].regDate)+"</td>"+
+					"</tr>"
 				);
+				*/
 			}
 			alert(data.pagination.totalCount);
 		},
@@ -64,7 +73,7 @@ function uxin_timestamp(time){
 <div class = "container">
 	<div class="main">
 		<div id="board">
-			<table class="table table-hover">
+			<table class="table table-hover" id="boardTable">
 			<thead>
 				<tr>
 					<td class="col-md-1"><b>번호</b></td>
