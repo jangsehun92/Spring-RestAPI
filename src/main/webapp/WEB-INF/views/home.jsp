@@ -10,7 +10,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 window.onload = function() {
-	alert("로드완료");
 	
 	$.ajax({
 		url:"/articles",
@@ -19,7 +18,7 @@ window.onload = function() {
 		dataType : "json", 
 		
 		success:function(data){
-			alert(data.articleList[0]);
+			//alert(data.articleList[0]);
 			
 			if(data.articleList != null){
 				for(var ele in data.articleList){
@@ -45,7 +44,7 @@ window.onload = function() {
 				);
 				*/
 			}
-			alert(data.pagination.totalCount);
+			//alert(data.pagination.totalCount);
 		},
 		error:function(request,status,error){
 			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -86,6 +85,11 @@ function uxin_timestamp(time){
 					
 				</tr>
 		</table>
+		
+		<div>
+			<!-- 페이지네이션 위치 -->
+		</div>
+		
 		</div>
 	</div>
 </div>
