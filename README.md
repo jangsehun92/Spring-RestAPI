@@ -1,4 +1,5 @@
 # Spring_RestApi_BoardProject
+- 사용자가 페이지에 처음 접근할땐 서버에서, 그 이후로는 클라이언트에서 HTML을 그리는 Universal Rendering 방식 으로 구현
 - ajax를 이용하여 RestAPI 호출
 - js & jqery 를 이용하여 RestApi에서 받아온 값을 처리
 
