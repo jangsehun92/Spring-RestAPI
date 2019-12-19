@@ -35,12 +35,14 @@ public class BoardRestApi {
 		return new ResponseEntity<Map<String, Object>>(boardService.articleList(page), HttpStatus.OK);
 	}
 
+	/*
 	//Article Detail
 	@GetMapping("/article/{id}")
 	public ResponseEntity<Article> detail(@PathVariable("id")int id) {
 		logger.info("/article/"+id);
 		return new ResponseEntity<Article>(boardService.articleDetail(id), HttpStatus.OK);
 	}
+	*/
 	
 	//Aritlce CREATE
 	@PostMapping("/article")
