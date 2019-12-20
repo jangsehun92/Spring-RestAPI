@@ -23,7 +23,6 @@
 			b.id,
 			b.writer,
 			b.title,
-			b.content,
 			b.reg_date
 		FROM 
 			(SELECT 
@@ -31,14 +30,12 @@
 				a.id, 
 				a.writer, 
 				a.title, 
-				a.content, 
 				a.reg_date
 			FROM(
 				SELECT 
 					id,
 					writer,
 					title,
-					content,
 					reg_date 
 				FROM 
 					test_board

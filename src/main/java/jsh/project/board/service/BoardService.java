@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import jsh.project.board.dao.BoardDao;
 import jsh.project.board.dto.Article;
 import jsh.project.board.dto.ArticleCreateRequest;
+import jsh.project.board.dto.ArticlePassword;
 import jsh.project.board.dto.ArticleUpdateRequest;
 import util.Pagination;
 
@@ -38,6 +39,10 @@ public class BoardService {
 	
 	public void articleCreate(ArticleCreateRequest dto) {
 		boardDao.create(dto);
+	}
+	
+	public void articlePasswordCheck(ArticlePassword articlePassword) {
+		
 	}
 	
 	public void articleUpdate(int id, ArticleUpdateRequest dto) {

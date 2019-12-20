@@ -18,24 +18,12 @@ public class Pagination {
 	private int startPage; //하단 페이지네이션의 시작 숫자 
 	private int endPage; //하단 페이지네이션의 마지막 숫자
 	
-	public Pagination() {
-		
-	}
-	
 	public Pagination(int totalCount, int page) {
 		this.totalCount = totalCount;
 		this.page = page;
 		make();
 	}
 	
-	public int getTotalCount() {
-		return totalCount;
-	}
-
-	public void setTotalCount(int totalCount) {
-		this.totalCount = totalCount;
-	}
-
 	public int getCountList() {
 		return countList;
 	}

@@ -60,16 +60,16 @@ function check_form(){
 		<form method="post" action="/article" onsubmit="return check_form();">
 			<table class="table">
 				<tr>
-					<td><input id="category" name="category" type="text" class="form-control"readonly="readonly" value="${category }"></td>
+					<td><input id="title" name="title" type="text" class="form-control" placeholder="제목" maxlength="50"></td>
 				</tr>
 				<tr>
-					<td><input id="title" name="title" type="text" class="form-control" placeholder="제목" maxlength="50"></td>
+					<td><input id="writer" name="writer" type="text" class="form-control" placeholder="작성자" maxlength="12"></td>
 				</tr>
 				<tr>
 					<td><textarea id="content" name="content" class="form-control" placeholder="내용" onkeydown="resize(this)"></textarea>
 				</tr>
 			</table>
-			<a href="/articles/${category }" class="btn btn-primary">목록</a>
+			<a href="/articles" class="btn btn-primary">목록</a>
 			<input type="submit" class="btn btn-primary" value="완료">
 		</form>
 	</div>

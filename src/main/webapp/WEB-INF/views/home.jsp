@@ -25,7 +25,7 @@ window.onload = function() {
 					$("#boardTable").append(
 						"<tr>"+
 							"<td>"+data.articleList[ele].id+"</td>"+
-							"<td>"+data.articleList[ele].title+"</td>"+
+							"<td><a href='/article/"+data.articleList[ele].id+"'>"+data.articleList[ele].title+"</a></td>"+
 							"<td align='right'>"+data.articleList[ele].writer+"</td>"+
 							"<td align='right'>"+uxin_timestamp(data.articleList[ele].regDate)+"</td>"+
 						"</tr>"
@@ -85,6 +85,10 @@ function uxin_timestamp(time){
 					
 				</tr>
 		</table>
+		
+		<div style="float: right">
+				<a href="/article/create" class="btn btn-primary">글쓰기</a>
+		</div>
 		
 		<div>
 			<!-- 페이지네이션 위치 -->

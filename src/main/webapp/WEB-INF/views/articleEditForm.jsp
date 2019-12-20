@@ -36,6 +36,7 @@ function check_form(){
 		$("#content").focus();
 		return false;
 	}
+	
 }
 </script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -46,17 +47,15 @@ function check_form(){
 	<div class="form">
 		<h2>글수정</h2>
 		<form method="post" action="/article/${article.id }" onsubmit="return check_form();">
-			<input type="hidden" name="_method" value="put"/>
+			<input type="hidden" name="_method" value="_patch"/>
 			<input type="hidden" name="id" value="${article.id }">
 			<table class="table">
 				<tr>
 					<td><input id="title" name="title" type="text" class="form-control" placeholder="제목" maxlength="50" value="${article.title }"></td>
 				</tr>
-				
 				<tr>
 					<td><input id="writer" name="writer" type="text" class="form-control" placeholder="작성자" maxlength="50" value="${article.writer }"></td>
 				</tr>
-				
 				<tr>
 					<td><textarea id="content" name="content" class="form-control" placeholder="내용" onkeydown="resize(this)">${article.content }</textarea>
 				</tr>

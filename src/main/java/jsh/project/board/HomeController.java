@@ -4,8 +4,6 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import jsh.project.board.dto.Article;
 import jsh.project.board.service.BoardService;
 
 @Controller
@@ -27,30 +24,33 @@ public class HomeController {
 	}
 	
 	//게시판 메인 페이지 요청
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@GetMapping(value = "/")
 	public String home(Locale locale, Model model) {
+		logger.info("GET /");
 		return "home";
 	}
 	
 	//글보기 요청
 	@GetMapping("/article/{id}")
-	public ResponseEntity<Article> detail(@PathVariable("id")int id) {
-		logger.info("/article/"+id);
-		return new ResponseEntity<Article>(boardService.articleDetail(id), HttpStatus.OK);
+	public String detail(Model model, @PathVariable("id")int id) {
+		logger.info("GET /article/"+id);
+		model.addAttribute("article",boardService.articleDetail(id));
+		return "articleDetailForm";
 	}
 	
 	//글입력 요청
-	@GetMapping("/article")
+	@GetMapping("/article/create")
 	public String articleCreateForm() {
+		logger.info("GET /article/create");
 		return "articleCreateForm";
 	}
 	
-	
 	//글수정폼 요청 
-	@GetMapping("/article/update/{id}")
+	@GetMapping("/article/edit/{id}")
 	public String articleUpdateForm(Model model,@PathVariable("id")int id) {
+		logger.info("GET /article/edit/"+id);
 		model.addAttribute("article",boardService.articleDetail(id));
-		return "articleUpdateForm";
+		return "articleEditForm";
 	}
 	
 	
