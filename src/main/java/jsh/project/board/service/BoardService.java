@@ -42,7 +42,7 @@ public class BoardService {
 	}
 	
 	public void articlePasswordCheck(ArticlePassword articlePassword) {
-		
+		boardDao.passwordCheck(articlePassword);
 	}
 	
 	public void articleUpdate(int id, ArticleUpdateRequest dto) {

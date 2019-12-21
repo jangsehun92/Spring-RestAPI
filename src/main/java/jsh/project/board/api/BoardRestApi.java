@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -70,7 +71,9 @@ public class BoardRestApi {
 	
 	//Article passwordCheck
 	@PostMapping("/article/password")
-	public ResponseEntity<String> passwordCheck(ArticlePassword articlePassword){
+	public ResponseEntity<String> passwordCheck(@RequestBody ArticlePassword articlePassword){
+		logger.info("POST /article/password?id=["+ articlePassword.getId()+"]&password=["+articlePassword.getPassword()+"]");
+		boardService.articlePasswordCheck(articlePassword);
 		return new ResponseEntity<String>("PASSWORD CHECK OK", HttpStatus.OK);
 	}
 	

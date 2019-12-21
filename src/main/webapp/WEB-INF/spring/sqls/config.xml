@@ -4,6 +4,8 @@
 
 	<typeAliases>
 		<typeAlias type="jsh.project.board.dto.Article" alias="Article"/>
+		<typeAlias type="jsh.project.board.dto.ArticleResponse" alias="ArticleResponse"/>
+		<typeAlias type="jsh.project.board.dto.ArticlePassword" alias="ArticlePassword"/>
 		<typeAlias type="jsh.project.board.dto.ArticleCreateRequest" alias="ArticleCreateRequest"/>
 		<typeAlias type="jsh.project.board.dto.ArticleUpdateRequest" alias="ArticleUpdateRequest"/>
 	</typeAliases>

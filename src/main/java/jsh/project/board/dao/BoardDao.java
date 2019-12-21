@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import jsh.project.board.dto.Article;
 import jsh.project.board.dto.ArticleCreateRequest;
+import jsh.project.board.dto.ArticlePassword;
 import jsh.project.board.dto.ArticleUpdateRequest;
 
 @Repository
@@ -29,6 +30,10 @@ public class BoardDao {
 	
 	public Article detail(int id) {
 		return sqlSession.selectOne("boardMapper.detail",id);
+	}
+	
+	public int passwordCheck(ArticlePassword articlePassword) {
+		return sqlSession.selectOne("boardMapper.passwordCheck",articlePassword);
 	}
 	
 	public int create(ArticleCreateRequest dto) {

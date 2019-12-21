@@ -20,7 +20,7 @@ window.onload = function() {
 		success:function(data){
 			//alert(data.articleList[0]);
 			
-			if(data.articleList != null){
+			if(data.articleList[0] != null){
 				for(var ele in data.articleList){
 					$("#boardTable").append(
 						"<tr>"+
@@ -43,6 +43,12 @@ window.onload = function() {
 					"</tr>"
 				);
 				*/
+			}else{
+				$("#boardTable").append(
+					"<tr>"+
+						"<td colspan='4' align='center'>등록된 게시글이 없습니다.</td>"+
+					"</tr>"
+				);
 			}
 			//alert(data.pagination.totalCount);
 		},

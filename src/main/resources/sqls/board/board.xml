@@ -10,13 +10,23 @@
 		<result property="content" column="content"/>
 		<result property="regDate" column="reg_date" />
 	</resultMap>
+	
+	<resultMap id="ArticleReponseResultMap" type="ArticleResponse">
+		<result property="id" column="id"/>
+		<result property="writer" column="writer"/>
+		<result property="title" column="title"/>
+		<result property="regDate" column="reg_date" />
+	</resultMap>
+	
 
 	<select id = "totalCount" resultType="int">
-		SELECT count(id)
-		FROM test_board
+		SELECT
+			count(id)
+		FROM 
+			test_rest_board
 	</select>
 	
-	<select id="list" parameterType="map" resultMap="ArticleResultMap">
+	<select id="list" parameterType="map" resultMap="ArticleReponseResultMap">
 	<![CDATA[
 		SELECT 
 			b.rnum,
@@ -38,7 +48,7 @@
 					title,
 					reg_date 
 				FROM 
-					test_board
+					test_rest_board
 				ORDER BY id DESC)a
 			WHERE
 				rownum <= #{endCount})b
@@ -54,17 +64,29 @@
 			content,
 			reg_date
 		FROM
-			test_board
+			test_rest_board
 		WHERE
 			id = #{id}
 	</select>
 	
+	<select id="passwordCheck" parameterType="ArticlePassword" resultType="int">
+		SELECT 
+			id
+		FROM 
+			test_rest_board
+		WHERE
+			id = #{id} 
+		AND
+			password = #{password}
+	</select>
+	
 	<insert id="insert" parameterType="ArticleCreateRequest">
 		INSERT INTO 
-			test_board
+			test_rest_board
 		VALUES(
 			test_board_seq.nextval,
 			#{writer},
+			#{password},
 			#{title},
 			#{content},
 			SYSDATE
@@ -73,7 +95,7 @@
 	
 	<update id="update" parameterType="ArticleUpdateRequest">
 		UPDATE 
-			test_board
+			test_rest_board
 		SET
 			TITLE = #{title},
 			CONTENT = #{content}
@@ -84,7 +106,7 @@
 	<delete id="delete" parameterType="int">
 		DELETE
 		FROM
-			test_board
+			test_rest_board
 		WHERE
 			id = #{id}
 	</delete>

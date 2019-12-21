@@ -2,14 +2,13 @@ package jsh.project.board.dto;
 
 import java.sql.Date;
 
-public class Article {
+public class ArticleResponse {
 	private int id;
 	private String writer;
 	private String title;
-	private String content;
 	private Date regDate;
 	
-	public Article() {
+	public ArticleResponse() {
 		
 	}
 
@@ -37,14 +36,6 @@ public class Article {
 		this.title = title;
 	}
 
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
 	public Date getRegDate() {
 		return regDate;
 	}
@@ -52,5 +43,4 @@ public class Article {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	
 }

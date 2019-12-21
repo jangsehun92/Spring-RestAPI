@@ -31,34 +31,9 @@ function bt_update(id){
 		alert("password를 입력해주세요.");
 		return;
 	}
+	
 	if(confirm("수정하시겠습니까?")){
-		window.location.href = "/article/edit/"+id;
-	}else{
-		return;
-	}
-}
-
-function bt_delete(id){
-	var password = $("#password").val().replace(/\s|/gi,'');
-	if(password == ""){
-		alert("password를 입력해주세요.");
-		//
-		$.ajax({
-			url:"/article/password",
-			//data:password,
-			type:"post",
-			success:function(data){
-				alert("삭제 되었습니다.");
-				window.location.href = "/";
-			},
-			error:function(request,status,error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-		//
-		return;
-	}
-	if(confirm("삭제하시겠습니까?")){
+		//비밀번호 체크
 		$.ajax({
 			url:"/article/"+id,
 			type:"delete",
@@ -70,10 +45,101 @@ function bt_delete(id){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
+		
+		window.location.href = "/article/edit/"+id;
 	}else{
 		return;
 	}
 }
+
+function bt_delete(id){
+	alert(passwordCheck);
+	var password = $("#articlePassword").val().replace(/\s|/gi,'');
+	
+	if(password == ""){
+		alert("password를 입력해주세요.");
+		return;
+	}
+	
+	if(confirm("삭제하시겠습니까?")){
+		var articlePassword = {
+				id : id,
+				password : password,
+		}
+		//입력된 비밀번호 체크
+		
+		$.ajax({
+			url:"/article/password",
+			type:"post",
+			contentType : "application/json; charset=UTF-8",
+			dataType : "text",
+			data: JSON.stringify(articlePassword),
+			
+			success:function(data){
+				//비밀번호가 맞을시
+				$.ajax({
+					url:"/article/"+id,
+					type:"delete",
+					success:function(data){
+						alert("삭제 되었습니다.");
+						window.location.href = "/";
+					},
+					error:function(request,status,error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+				});
+			},
+			error:function(request,status,error){
+				alert("비밀번호가 다릅니다.");
+				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+		/*		
+		if(passwordCheck(id)){
+			$.ajax({
+				url:"/article/"+id,
+				type:"delete",
+				success:function(data){
+					alert("삭제 되었습니다.");
+					window.location.href = "/";
+				},
+				error:function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+		}
+	}else{
+		return;
+	}
+}
+
+
+/*
+function passwordCheck(id){
+	var password = $("#articlePassword").val().replace(/\s|/gi,'');
+	
+	var articlePassword = {
+		id : id,
+		password : password,
+	}
+	
+	$.ajax({
+		url:"/article/password",
+		type:"post",
+		contentType : "application/json; charset=UTF-8",
+		dataType : "text",
+		data: JSON.stringify(articlePassword),
+		
+		success:function(data){
+			return true;
+		},
+		error:function(request,status,error){
+			alert("비밀번호가 다릅니다.");
+		}
+	});
+	return false;
+}
+*/
 
 
 </script>
@@ -108,7 +174,9 @@ function bt_delete(id){
 						
 						<div style="float: right">
 							<div style="float: left">
-								<input type="password" class="form-control" id="password"placeholder="password 입력">
+							<form>
+								<input type="password" class="form-control" id="articlePassword" placeholder="password 입력">
+							</form>
 							</div>
 							
 							<!-- 수정,삭제를 버튼으로 만들어서 자바스크립트로 처리하기 -->

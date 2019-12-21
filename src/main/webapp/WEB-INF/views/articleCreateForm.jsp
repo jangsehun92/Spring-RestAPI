@@ -28,18 +28,26 @@ function check_form(){
 	//replace 로 공백 제거
 	var inputForm_title = $("#title").val().replace(/\s|/gi,'');
 	var inputForm_writer = $("#writer").val().replace(/\s|/gi,'');
+	var inputForm_password = $("#password").val().replace(/\s|/gi,'');
 	var inputForm_content = $("#content").val().replace(/\s|/gi,'');
 	
 	if(inputForm_title==""){
 		alert("제목을 입력해주세요.");
-		$("title").val("");
+		$("#title").val("");
 		$("#title").focus();
+		return false;
+	}
+	
+	if(inputForm_password==""){
+		alert("비밀번호를 입력해주세요.");
+		$("#password").val("");
+		$("#password").focus();
 		return false;
 	}
 	
 	if(inputForm_writer==""){
 		alert("작성자를 입력해주세요.");
-		$("writer").val("");
+		$("#writer").val("");
 		$("#writer").focus();
 		return false;
 	}
@@ -60,10 +68,13 @@ function check_form(){
 		<form method="post" action="/article" onsubmit="return check_form();">
 			<table class="table">
 				<tr>
-					<td><input id="title" name="title" type="text" class="form-control" placeholder="제목" maxlength="50"></td>
+					<td><input id="writer" name="writer" type="text" class="form-control" placeholder="작성자" maxlength="12"></td>
 				</tr>
 				<tr>
-					<td><input id="writer" name="writer" type="text" class="form-control" placeholder="작성자" maxlength="12"></td>
+					<td><input id="password" name="password" type="password" class="form-control" placeholder="비밀번호" maxlength="64"></td>
+				</tr>
+				<tr>
+					<td><input id="title" name="title" type="text" class="form-control" placeholder="제목" maxlength="50"></td>
 				</tr>
 				<tr>
 					<td><textarea id="content" name="content" class="form-control" placeholder="내용" onkeydown="resize(this)"></textarea>
