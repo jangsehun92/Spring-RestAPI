@@ -33,20 +33,25 @@ function bt_update(id){
 	}
 	
 	if(confirm("수정하시겠습니까?")){
-		//비밀번호 체크
+		var articlePassword = {
+				id : id,
+				password : password,
+		}
+		//입력된 비밀번호 체크
 		$.ajax({
-			url:"/article/"+id,
-			type:"delete",
+			url:"/article/password",
+			type:"post",
+			contentType : "application/json; charset=UTF-8",
+			dataType : "text",
+			data: JSON.stringify(articlePassword),
 			success:function(data){
-				alert("삭제 되었습니다.");
-				window.location.href = "/";
+				window.location.href = "/article/edit/"+id;
 			},
 			error:function(request,status,error){
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				alert("비밀번호가 다릅니다.");
+				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
-		
-		window.location.href = "/article/edit/"+id;
 	}else{
 		return;
 	}
@@ -67,7 +72,6 @@ function bt_delete(id){
 				password : password,
 		}
 		//입력된 비밀번호 체크
-		
 		$.ajax({
 			url:"/article/password",
 			type:"post",
@@ -108,12 +112,11 @@ function bt_delete(id){
 				}
 			});
 		}
+		*/
 	}else{
 		return;
 	}
 }
-
-
 /*
 function passwordCheck(id){
 	var password = $("#articlePassword").val().replace(/\s|/gi,'');
