@@ -36,7 +36,7 @@ public class HomeController {
 		return "articleDetailForm";
 	}
 	
-	//글입력 요청
+	//글입력폼 요청
 	@GetMapping("/article/create")
 	public String articleCreateForm() {
 		logger.info("GET /article/create");

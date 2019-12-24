@@ -26,7 +26,7 @@ function uxin_timestamp(time){
 }
 
 function bt_update(id){
-	var password = $("#password").val().replace(/\s|/gi,'');
+	var password = $("#articlePassword").val().replace(/\s|/gi,'');
 	if(password == ""){
 		alert("password를 입력해주세요.");
 		return;
@@ -37,7 +37,7 @@ function bt_update(id){
 				id : id,
 				password : password,
 		}
-		//입력된 비밀번호 체크
+		//입력한 비밀번호 체크
 		$.ajax({
 			url:"/article/password",
 			type:"post",
@@ -49,7 +49,6 @@ function bt_update(id){
 			},
 			error:function(request,status,error){
 				alert("비밀번호가 다릅니다.");
-				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 	}else{
@@ -58,7 +57,7 @@ function bt_update(id){
 }
 
 function bt_delete(id){
-	alert(passwordCheck);
+	//alert(passwordCheck);
 	var password = $("#articlePassword").val().replace(/\s|/gi,'');
 	
 	if(password == ""){
@@ -71,7 +70,7 @@ function bt_delete(id){
 				id : id,
 				password : password,
 		}
-		//입력된 비밀번호 체크
+		//입력한 비밀번호 체크
 		$.ajax({
 			url:"/article/password",
 			type:"post",
@@ -80,7 +79,6 @@ function bt_delete(id){
 			data: JSON.stringify(articlePassword),
 			
 			success:function(data){
-				//비밀번호가 맞을시
 				$.ajax({
 					url:"/article/"+id,
 					type:"delete",
@@ -95,7 +93,6 @@ function bt_delete(id){
 			},
 			error:function(request,status,error){
 				alert("비밀번호가 다릅니다.");
-				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 		/*		

@@ -4,6 +4,10 @@ public class ArticleUpdateRequest {
 	private int id;
 	private String title;
 	private String content;
+	
+	public ArticleUpdateRequest() {
+		
+	}
 
 	public ArticleUpdateRequest(String title, String content) {
 		this.title = title;

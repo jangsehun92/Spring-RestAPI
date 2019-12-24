@@ -6,6 +6,10 @@ public class ArticleCreateRequest {
 	private String title;
 	private String content;
 	
+	public ArticleCreateRequest() {
+		
+	}
+	
 	public ArticleCreateRequest(String writer, String password, String title, String content) {
 		this.writer = writer;
 		this.password = password;

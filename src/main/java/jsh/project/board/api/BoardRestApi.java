@@ -37,7 +37,7 @@ public class BoardRestApi {
 		return new ResponseEntity<Map<String, Object>>(boardService.articleList(page), HttpStatus.OK);
 	}
 
-	/*
+	/* REST API 에서 해당 글의 정보를 가져올 때
 	//Article Detail
 	@GetMapping("/article/{id}")
 	public ResponseEntity<Article> detail(@PathVariable("id")int id) {
@@ -48,7 +48,8 @@ public class BoardRestApi {
 	
 	//Article CREATE
 	@PostMapping("/article")
-	public ResponseEntity<String> create(ArticleCreateRequest dto){
+	public ResponseEntity<String> create(@RequestBody ArticleCreateRequest dto){
+		logger.info("dto.getDate : "+dto.getTitle());
 		logger.info("POST /article");
 		boardService.articleCreate(dto);
 		return new ResponseEntity<String>("CREATE OK",HttpStatus.CREATED);
@@ -56,8 +57,9 @@ public class BoardRestApi {
 	
 	//Article UPDATE
 	@PatchMapping("/article/{id}")
-	public ResponseEntity<String> create(ArticleUpdateRequest dto, @PathVariable("id")int id){
+	public ResponseEntity<String> create(@RequestBody ArticleUpdateRequest dto, @PathVariable("id")int id){
 		logger.info("PATCH /article/"+id);
+		boardService.articleUpdate(id, dto);
 		return new ResponseEntity<String>("UPDATE OK",HttpStatus.OK);
 	}
 	

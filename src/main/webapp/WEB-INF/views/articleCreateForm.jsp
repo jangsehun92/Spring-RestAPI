@@ -17,6 +17,22 @@
 textarea {min-height: 50px;}
 </style>
 <script type="text/javascript">
+jQuery.fn.serializeObject = function() { 
+    var obj = null; 
+    try { 
+        if(this[0].tagName && this[0].tagName.toUpperCase() == "FORM" ) { 
+            var arr = this.serializeArray(); 
+            if(arr){ obj = {}; 
+            jQuery.each(arr, function() { 
+                obj[this.name] = this.value; }); 
+            } 
+        } 
+    }catch(e) { 
+        alert(e.message); 
+    }finally {} 
+    return obj; 
+}
+
 //textarea 입력값에 따라 height 조절
 function resize(obj){
 	obj.style.height = "1px";
@@ -58,14 +74,34 @@ function check_form(){
 		$("#content").focus();
 		return false;
 	}
+	
+	var articleCreateRequest = $("form[name=articleCreateForm]").serializeObject();
+	
+	alert(articleCreateRequest);
+	
+	$.ajax({
+		url:"/article",
+		type:"post",
+		contentType : "application/json; charset=UTF-8",
+		dataType : "text",
+		data: JSON.stringify(articleCreateRequest),
+		success:function(data){
+			window.location.href = "/";
+		},
+		error:function(request,status,error){
+			alert("글쓰기 실패 ");
+		}
+	});
 }
+
+
 </script>
 
 <body>
 <div class="container" style="margin-top: 50px">
 	<div class="form">
 		<h2>글쓰기</h2>
-		<form method="post" action="/article" onsubmit="return check_form();">
+		<form name = "articleCreateForm" id = "articleCreateForm">
 			<table class="table">
 				<tr>
 					<td><input id="writer" name="writer" type="text" class="form-control" placeholder="작성자" maxlength="12"></td>
@@ -80,9 +116,9 @@ function check_form(){
 					<td><textarea id="content" name="content" class="form-control" placeholder="내용" onkeydown="resize(this)"></textarea>
 				</tr>
 			</table>
-			<a href="/articles" class="btn btn-primary">목록</a>
-			<input type="submit" class="btn btn-primary" value="완료">
 		</form>
+		<a href="/" class="btn btn-primary">목록</a>
+		<input type="button" class="btn btn-primary" value="완료" onclick="return check_form();">
 	</div>
 </div>
 </body>
