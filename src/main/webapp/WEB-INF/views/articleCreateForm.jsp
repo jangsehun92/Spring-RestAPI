@@ -39,7 +39,6 @@ function resize(obj){
 	obj.style.height = (12+obj.scrollHeight)+"px";
 }
 
-//유효성 검사
 function check_form(){
 	//replace 로 공백 제거
 	var inputForm_title = $("#title").val().replace(/\s|/gi,'');
@@ -77,8 +76,6 @@ function check_form(){
 	
 	var articleCreateRequest = $("form[name=articleCreateForm]").serializeObject();
 	
-	alert(articleCreateRequest);
-	
 	$.ajax({
 		url:"/article",
 		type:"post",
@@ -89,7 +86,7 @@ function check_form(){
 			window.location.href = "/";
 		},
 		error:function(request,status,error){
-			alert("글쓰기 실패 ");
+			alert("글쓰기 실패");
 		}
 	});
 }

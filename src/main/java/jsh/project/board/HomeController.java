@@ -1,7 +1,5 @@
 package jsh.project.board;
 
-import java.util.Locale;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -23,7 +21,7 @@ public class HomeController {
 	
 	//게시판 메인 페이지 요청
 	@GetMapping(value = "/")
-	public String home(Locale locale, Model model) {
+	public String home() {
 		logger.info("GET /");
 		return "home";
 	}

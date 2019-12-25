@@ -41,8 +41,8 @@ public class BoardService {
 		boardDao.create(dto);
 	}
 	
-	public void articlePasswordCheck(ArticlePassword articlePassword) {
-		boardDao.passwordCheck(articlePassword);
+	public boolean articlePasswordCheck(ArticlePassword articlePassword) {
+		return boardDao.passwordCheck(articlePassword)!=0?true:false;
 	}
 	
 	public void articleUpdate(int id, ArticleUpdateRequest dto) {

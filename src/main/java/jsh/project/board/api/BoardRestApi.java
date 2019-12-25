@@ -48,35 +48,37 @@ public class BoardRestApi {
 	
 	//Article CREATE
 	@PostMapping("/article")
-	public ResponseEntity<String> create(@RequestBody ArticleCreateRequest dto){
+	public ResponseEntity<HttpStatus> create(@RequestBody ArticleCreateRequest dto){
 		logger.info("dto.getDate : "+dto.getTitle());
 		logger.info("POST /article");
 		boardService.articleCreate(dto);
-		return new ResponseEntity<String>("CREATE OK",HttpStatus.CREATED);
+		return new ResponseEntity<HttpStatus>(HttpStatus.CREATED);
 	}
 	
 	//Article UPDATE
 	@PatchMapping("/article/{id}")
-	public ResponseEntity<String> create(@RequestBody ArticleUpdateRequest dto, @PathVariable("id")int id){
+	public ResponseEntity<HttpStatus> create(@RequestBody ArticleUpdateRequest dto, @PathVariable("id")int id){
 		logger.info("PATCH /article/"+id);
 		boardService.articleUpdate(id, dto);
-		return new ResponseEntity<String>("UPDATE OK",HttpStatus.OK);
+		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 	
 	//Article DELETE
 	@DeleteMapping("/article/{id}")
-	public ResponseEntity<String> delete(@PathVariable("id")int id){
+	public ResponseEntity<HttpStatus> delete(@PathVariable("id")int id){
 		logger.info("DELETE /article/"+id);
 		boardService.articleDelete(id);
-		return new ResponseEntity<String>("DELETE OK", HttpStatus.OK);
+		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 	
 	//Article passwordCheck
 	@PostMapping("/article/password")
-	public ResponseEntity<String> passwordCheck(@RequestBody ArticlePassword articlePassword){
+	public ResponseEntity<HttpStatus> passwordCheck(@RequestBody ArticlePassword articlePassword){
 		logger.info("POST /article/password?id=["+ articlePassword.getId()+"]&password=["+articlePassword.getPassword()+"]");
-		boardService.articlePasswordCheck(articlePassword);
-		return new ResponseEntity<String>("PASSWORD CHECK OK", HttpStatus.OK);
+		if(boardService.articlePasswordCheck(articlePassword)) {
+			return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+		}
+		return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
 	}
 	
 	

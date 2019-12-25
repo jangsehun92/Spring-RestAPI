@@ -34,7 +34,6 @@ function resize(obj){
 	
 }
 
-//유효성 검사
 function check_form(id){
 	var inputForm_title = $("#title").val().replace(/\s|/gi,'');
 	var inputForm_content = $("#content").val().replace(/\s|/gi,'');
@@ -55,19 +54,17 @@ function check_form(id){
 	
 	var articleUpdateRequest = $("form[name=articleUpdateForm]").serializeObject();
 	
-	alert(articleUpdateRequest);
-	
 	$.ajax({
 		url:"/article/"+id,
 		type:"patch",
 		contentType : "application/json; charset=UTF-8",
 		dataType : "text",
 		data: JSON.stringify(articleUpdateRequest),
-		success:function(data){
+		success:function(httpStatus){
 			window.location.href = "/article/"+id;
 		},
 		error:function(request,status,error){
-			alert("글수정 실패 ");
+			alert("글수정 실패");
 		}
 	});
 	
