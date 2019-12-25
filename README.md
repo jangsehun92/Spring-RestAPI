@@ -10,6 +10,10 @@
 * 게시글 입력
 * 해당 글의 비밀번호 입력 후 수정/삭제
 
+## form data json 전송
+* 프론트 단의 form 데이터를 javaScript를 이용하여 서버로 보낼 때 serializeObject()를 사용하여 json 모양의 object로 보낸다.
+* 서버단에서 @RequestBody를 이용하여 데이터를 받고, 스프링에서 jackson을 통해 DTO에 넣어준다.
+
 ## 관련 dependency 
 * OracleDB : https://github.com/jangsehun92/SpringOracleDB
 * jackson-databind 추가
