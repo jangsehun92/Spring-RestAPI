@@ -10,19 +10,22 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 window.onload = function() {
-	
+	pagination(1);
+};
+
+function pagination(page){
+	$("#boardBody").empty();
+	$("#pagination").empty();
 	$.ajax({
-		url:"/articles",
+		url:"/articles?page="+page,
 		type:"get",
 		contentType : "application/json; charset=UTF-8",
 		dataType : "json", 
 		
 		success:function(data){
-			//alert(data.articleList[0]);
-			
 			if(data.articleList[0] != null){
 				for(var ele in data.articleList){
-					$("#boardTable").append(
+					$("#boardBody").append(
 						"<tr>"+
 							"<td>"+data.articleList[ele].id+"</td>"+
 							"<td><a href='/article/"+data.articleList[ele].id+"'>"+data.articleList[ele].title+"</a></td>"+
@@ -31,18 +34,41 @@ window.onload = function() {
 						"</tr>"
 					);
 				}
+				
+				console.log("pagination",data.pagination);
+				
+				if(data.pagination.startPage > 1){
+					$("#pagination").append("<li class=''><a href='#' onclick='page(1)' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>");
+				}else{
+					$("#pagination").append("<li class='disabled'><a href='#' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>");
+				}
+				
+				if(data.pagination.page > 1){
+					$("#pagination").append("<li class=''><a href='#' onclick='page("+(data.pagination.page-1)+")' aria-label='Previous'><span aria-hidden='true'>&lang;</span></a></li>");
+				}else{
+					$("#pagination").append("<li class='disabled'><a href='#' aria-label='Previous'><span aria-hidden='true'>&lang;</span></a></li>");
+				}
+				
+				for(var iCount = data.pagination.startPage; iCount <= data.pagination.endPage; iCount++) {
+					if (iCount == data.pagination.page) {
+				       $("#pagination").append("<li class='active'><a href='#'>"+iCount+"<span class='sr-only'></span></a></li>");
+				    } else {
+				    	$("#pagination").append("<li class=''><a a href='#' onclick='page("+iCount+")'>" + iCount + "<span class='sr-only'></span></a></li>");
+				    }
+				}
+				
+				if(data.pagination.page < data.pagination.totalPage){
+					$("#pagination").append("<li class=''><a a href='#' onclick='page("+(data.pagination.page+1)+")' aria-label='Next'><span aria-hidden='true'>&rang;</span></a></li>");
+				}else{
+					$("#pagination").append("<li class='disabled'><a href='#' aria-label='Next'><span aria-hidden='true'>&rang;</span></a></li>");
+				}
+				
+				if(data.pagination.endPage < data.pagination.totalPage){
+					$("#pagination").append("<li class=''><a href='#' onclick='page("+data.pagination.totalPage+")' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
+				}else{
+					$("#pagination").append("<li class='disabled'><a href='#' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
+				}
 
-				//alert(data.articleList[0].id);
-				/*
-				$("#boardTable").append(
-					"<tr>"+
-						"<td>"+data.articleList[0].id+"</td>"+
-						"<td>"+data.articleList[0].title+"</td>"+
-						"<td align='right'>"+data.articleList[0].writer+"</td>"+
-						"<td align='right'>"+uxin_timestamp(data.articleList[0].regDate)+"</td>"+
-					"</tr>"
-				);
-				*/
 			}else{
 				$("#boardTable").append(
 					"<tr>"+
@@ -50,15 +76,12 @@ window.onload = function() {
 					"</tr>"
 				);
 			}
-			//alert(data.pagination.totalCount);
 		},
 		error:function(request,status,error){
 			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
 	});
-	return false;
-
-};
+}
 
 function uxin_timestamp(time){
 	var date = new Date(time);
@@ -72,9 +95,11 @@ function uxin_timestamp(time){
 }
 </script>
 <body>
-<h1>
-	게시판  
-</h1>
+<div style="text-align: center">
+	<h1>
+		게시판
+	</h1>
+</div>
 <div class = "container">
 	<div class="main">
 		<div id="board">
@@ -87,9 +112,9 @@ function uxin_timestamp(time){
 					<td class="col-md-2" align="right"><b>작성 날짜</b></td>
 				</tr>
 			</thead>
-				<tr id="articleList">
-					
-				</tr>
+			<tbody id="boardBody">
+			
+			</tbody>
 		</table>
 		
 		<div style="float: right">
@@ -98,6 +123,10 @@ function uxin_timestamp(time){
 		
 		<div>
 			<!-- 페이지네이션 위치 -->
+			<nav aria-label="..." style="text-align: center;">
+				<ul class="pagination" id="pagination">
+				</ul>
+			</nav>
 		</div>
 		
 		</div>

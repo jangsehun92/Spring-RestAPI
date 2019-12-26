@@ -32,7 +32,7 @@ public class BoardRestApi {
 	
 	//Article List
 	@GetMapping("/articles")
-	public ResponseEntity<Map<String, Object>> list(@RequestParam(required = false, defaultValue = "1")int page){
+	public ResponseEntity<Map<String, Object>> list(@RequestParam(required = false, defaultValue="1")int page){
 		logger.info("GET /articles/"+page);
 		return new ResponseEntity<Map<String, Object>>(boardService.articleList(page), HttpStatus.OK);
 	}
