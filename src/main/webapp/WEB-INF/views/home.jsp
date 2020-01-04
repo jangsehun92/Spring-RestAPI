@@ -53,7 +53,7 @@ function pagination(page){
 					if (iCount == data.pagination.page) {
 				       $("#pagination").append("<li class='active'><a href='#'>"+iCount+"<span class='sr-only'></span></a></li>");
 				    } else {
-				    	$("#pagination").append("<li class=''><a a href='#' onclick='page("+iCount+")'>" + iCount + "<span class='sr-only'></span></a></li>");
+				    	$("#pagination").append("<li class=''><a href='#' onclick='page("+iCount+")'>" + iCount + "<span class='sr-only'></span></a></li>");
 				    }
 				}
 				
